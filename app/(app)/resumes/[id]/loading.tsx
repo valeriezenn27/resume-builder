@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="grid h-[calc(100vh-4rem)] grid-cols-[13rem_36rem_1fr]"><div className="animate-pulse bg-white"/><div className="animate-pulse border-x border-black/5 bg-white/70"/><div className="animate-pulse bg-black/5"/></div>}
