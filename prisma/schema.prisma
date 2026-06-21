@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Resume {
+  id             String          @id @default(uuid()) @db.Uuid
+  userId         String          @map("user_id") @db.Uuid
+  title          String          @default("Untitled Resume")
+  template       String          @default("classic")
+  summary        String          @default("")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  profile        ResumeProfile?
+  experiences    ResumeExperience[]
+  educations     ResumeEducation[]
+  skills         ResumeSkill[]
+  projects       ResumeProject[]
+  certifications ResumeCertification[]
+
+  @@index([userId])
+  @@map("resumes")
+}
+
+model ResumeProfile {
+  id       String  @id @default(uuid()) @db.Uuid
+  resumeId String  @unique @map("resume_id") @db.Uuid
+  fullName String  @default("") @map("full_name")
+  email    String  @default("")
+  phone    String  @default("")
+  location String  @default("")
+  website  String  @default("")
+  linkedIn String  @default("") @map("linkedin")
+  resume   Resume  @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  @@map("resume_profiles")
+}
+
+model ResumeExperience {
+  id        String @id @default(uuid()) @db.Uuid
+  resumeId  String @map("resume_id") @db.Uuid
+  company   String @default("")
+  position  String @default("")
+  location  String @default("")
+  startDate String @default("") @map("start_date")
+  endDate   String @default("") @map("end_date")
+  current   Boolean @default(false)
+  details   String @default("")
+  sortOrder Int @default(0) @map("sort_order")
+  resume    Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  @@map("resume_experiences")
+}
+
+model ResumeEducation {
+  id        String @id @default(uuid()) @db.Uuid
+  resumeId  String @map("resume_id") @db.Uuid
+  school    String @default("")
+  degree    String @default("")
+  field     String @default("")
+  startDate String @default("") @map("start_date")
+  endDate   String @default("") @map("end_date")
+  details   String @default("")
+  sortOrder Int @default(0) @map("sort_order")
+  resume    Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  @@map("resume_educations")
+}
+
+model ResumeSkill {
+  id        String @id @default(uuid()) @db.Uuid
+  resumeId  String @map("resume_id") @db.Uuid
+  name      String
+  level     String @default("")
+  sortOrder Int @default(0) @map("sort_order")
+  resume    Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  @@map("resume_skills")
+}
+
+model ResumeProject {
+  id          String @id @default(uuid()) @db.Uuid
+  resumeId    String @map("resume_id") @db.Uuid
+  name        String @default("")
+  description String @default("")
+  url         String @default("")
+  technologies String @default("")
+  sortOrder   Int @default(0) @map("sort_order")
+  resume      Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  @@map("resume_projects")
+}
+
+model ResumeCertification {
+  id        String @id @default(uuid()) @db.Uuid
+  resumeId  String @map("resume_id") @db.Uuid
+  name      String @default("")
+  issuer    String @default("")
+  date      String @default("")
+  url       String @default("")
+  sortOrder Int @default(0) @map("sort_order")
+  resume    Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  @@map("resume_certifications")
+}
