@@ -6,7 +6,7 @@ export default function Home() {
   return <main className="min-h-screen overflow-hidden">
     <LandingNav/>
     <section className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-24 pt-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:pt-24">
-      <div><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-forge-600/20 bg-forge-50 px-3 py-1.5 text-xs font-bold text-forge-700"><Sparkles size={14}/> Your story, professionally forged</div>
+      <div><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-forge-600/20 bg-forge-50 px-3 py-1.5 text-xs font-bold text-forge-700"><Sparkles size={14}/> A fresh start for your career story</div>
         <h1 className="max-w-3xl font-serif text-5xl font-bold leading-[1.04] tracking-tight sm:text-7xl">A resume that feels like <em className="text-forge-600">you</em>—at your best.</h1>
         <p className="mt-6 max-w-xl text-lg leading-8 text-black/60">Shape your experience into a polished, job-ready resume. Beautiful templates, thoughtful guidance, and instant PDF export.</p>
         <div className="mt-9 flex flex-wrap gap-3"><Link href="/register" className="btn-primary px-6 py-3.5 text-base">Create your resume <ArrowRight size={18}/></Link><Link href="#features" className="btn-secondary px-6 py-3.5 text-base">See how it works</Link></div>

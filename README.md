@@ -1,6 +1,6 @@
-# ResumeForge
+# ResuMint
 
-ResumeForge is a full-stack resume builder with Supabase authentication, Prisma-backed PostgreSQL persistence, two live templates, and browser-side PDF export.
+ResuMint is a full-stack resume builder with Supabase authentication, Prisma-backed PostgreSQL persistence, two live templates, and browser-side PDF export.
 
 ## Stack
 
