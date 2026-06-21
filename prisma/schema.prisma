@@ -13,6 +13,7 @@ model Resume {
   userId         String          @map("user_id") @db.Uuid
   title          String          @default("Untitled Resume")
   template       String          @default("classic")
+  fontFamily     String          @default("sans") @map("font_family")
   summary        String          @default("")
   createdAt      DateTime        @default(now()) @map("created_at")
   updatedAt      DateTime        @updatedAt @map("updated_at")

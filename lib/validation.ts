@@ -1,11 +1,13 @@
 import { z } from "zod";
 import { templateIds } from "@/lib/templates";
+import { fontIds } from "@/lib/fonts";
 
 const text = z.string().trim().max(2000);
 const itemBase = z.object({ id: z.string().optional() });
 export const resumeSchema = z.object({
   title: z.string().trim().min(1, "Resume title is required").max(100),
   template: z.enum(templateIds),
+  fontFamily: z.enum(fontIds),
   summary: text,
   profile: z.object({
     fullName: z.string().trim().min(1, "Full name is required").max(100),

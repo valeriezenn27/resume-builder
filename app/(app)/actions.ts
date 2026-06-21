@@ -38,7 +38,7 @@ export async function duplicateResume(id: string) {
   const source = await prisma.resume.findFirst({ where: { id, userId: uid }, include: resumeInclude });
   if (!source) return { error: "Resume not found." };
   await prisma.resume.create({ data: {
-    userId: uid, title: `${source.title} (Copy)`, template: source.template, summary: source.summary,
+    userId: uid, title: `${source.title} (Copy)`, template: source.template, fontFamily: source.fontFamily, summary: source.summary,
     profile: source.profile ? { create: { fullName: source.profile.fullName, email: source.profile.email, phone: source.profile.phone, location: source.profile.location, website: source.profile.website, linkedIn: source.profile.linkedIn } } : undefined,
     experiences: { create: source.experiences.map(({ company,position,location,startDate,endDate,current,details,sortOrder })=>({company,position,location,startDate,endDate,current,details,sortOrder})) },
     educations: { create: source.educations.map(({ school,degree,field,startDate,endDate,details,sortOrder })=>({school,degree,field,startDate,endDate,details,sortOrder})) },

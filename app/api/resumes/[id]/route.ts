@@ -12,7 +12,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id:s
     const exists=await prisma.resume.findFirst({where:{id,userId:user.id},select:{id:true}}); if(!exists)return NextResponse.json({error:"Resume not found"},{status:404});
     const d=parsed.data;
     await prisma.$transaction(async tx=>{
-      await tx.resume.update({where:{id},data:{title:d.title,template:d.template,summary:d.summary,profile:{upsert:{create:d.profile,update:d.profile}}}});
+      await tx.resume.update({where:{id},data:{title:d.title,template:d.template,fontFamily:d.fontFamily,summary:d.summary,profile:{upsert:{create:d.profile,update:d.profile}}}});
       await Promise.all([tx.resumeExperience.deleteMany({where:{resumeId:id}}),tx.resumeEducation.deleteMany({where:{resumeId:id}}),tx.resumeSkill.deleteMany({where:{resumeId:id}}),tx.resumeProject.deleteMany({where:{resumeId:id}}),tx.resumeCertification.deleteMany({where:{resumeId:id}})]);
       await Promise.all([
         d.experiences.length&&tx.resumeExperience.createMany({data:d.experiences.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
