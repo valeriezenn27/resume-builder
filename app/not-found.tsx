@@ -1,0 +1,2 @@
+import Link from "next/link"; import { FileQuestion } from "lucide-react";
+export default function NotFound(){return <main className="grid min-h-screen place-items-center px-5 text-center"><div><FileQuestion className="mx-auto text-forge-600" size={44}/><h1 className="mt-5 font-serif text-4xl font-bold">That page slipped away.</h1><p className="mt-3 text-black/50">The resume may have been removed or isn’t available to you.</p><Link href="/dashboard" className="btn-primary mt-7">Back to dashboard</Link></div></main>}
