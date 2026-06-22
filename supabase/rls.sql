@@ -7,6 +7,7 @@ alter table public.resume_educations enable row level security;
 alter table public.resume_skills enable row level security;
 alter table public.resume_projects enable row level security;
 alter table public.resume_certifications enable row level security;
+alter table public.resume_custom_sections enable row level security;
 
 create policy "Users manage their resumes" on public.resumes
 for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
@@ -32,5 +33,9 @@ for all using (exists (select 1 from public.resumes r where r.id = resume_id and
 with check (exists (select 1 from public.resumes r where r.id = resume_id and r.user_id = auth.uid()));
 
 create policy "Users manage their resume certifications" on public.resume_certifications
+for all using (exists (select 1 from public.resumes r where r.id = resume_id and r.user_id = auth.uid()))
+with check (exists (select 1 from public.resumes r where r.id = resume_id and r.user_id = auth.uid()));
+
+create policy "Users manage their custom resume sections" on public.resume_custom_sections
 for all using (exists (select 1 from public.resumes r where r.id = resume_id and r.user_id = auth.uid()))
 with check (exists (select 1 from public.resumes r where r.id = resume_id and r.user_id = auth.uid()));

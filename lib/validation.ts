@@ -19,5 +19,6 @@ export const resumeSchema = z.object({
   skills: z.array(itemBase.extend({ name: z.string().min(1, "Skill is required"), level: text })),
   projects: z.array(itemBase.extend({ name: z.string().min(1, "Project name is required"), description: text, url: text, technologies: text })),
   certifications: z.array(itemBase.extend({ name: z.string().min(1, "Certification is required"), issuer: text, date: text, url: text })),
+  customSections: z.array(itemBase.extend({ title: z.string().trim().min(1, "Section title is required").max(100), content: text })),
 });
 export type ResumeInput = z.infer<typeof resumeSchema>;

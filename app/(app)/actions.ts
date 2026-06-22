@@ -45,6 +45,7 @@ export async function duplicateResume(id: string) {
     skills: { create: source.skills.map(({name,level,sortOrder})=>({name,level,sortOrder})) },
     projects: { create: source.projects.map(({name,description,url,technologies,sortOrder})=>({name,description,url,technologies,sortOrder})) },
     certifications: { create: source.certifications.map(({name,issuer,date,url,sortOrder})=>({name,issuer,date,url,sortOrder})) },
+    customSections: { create: source.customSections.map(({title,content,sortOrder})=>({title,content,sortOrder})) },
   } });
   revalidatePath("/dashboard"); return { ok: true };
 }

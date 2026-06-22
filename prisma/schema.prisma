@@ -23,6 +23,7 @@ model Resume {
   skills         ResumeSkill[]
   projects       ResumeProject[]
   certifications ResumeCertification[]
+  customSections  ResumeCustomSection[]
 
   @@index([userId])
   @@map("resumes")
@@ -103,4 +104,14 @@ model ResumeCertification {
   sortOrder Int @default(0) @map("sort_order")
   resume    Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
   @@map("resume_certifications")
+}
+
+model ResumeCustomSection {
+  id        String @id @default(uuid()) @db.Uuid
+  resumeId  String @map("resume_id") @db.Uuid
+  title     String
+  content   String @default("")
+  sortOrder Int @default(0) @map("sort_order")
+  resume    Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  @@map("resume_custom_sections")
 }

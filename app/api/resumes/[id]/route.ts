@@ -13,13 +13,14 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id:s
     const d=parsed.data;
     await prisma.$transaction(async tx=>{
       await tx.resume.update({where:{id},data:{title:d.title,template:d.template,fontFamily:d.fontFamily,summary:d.summary,profile:{upsert:{create:d.profile,update:d.profile}}}});
-      await Promise.all([tx.resumeExperience.deleteMany({where:{resumeId:id}}),tx.resumeEducation.deleteMany({where:{resumeId:id}}),tx.resumeSkill.deleteMany({where:{resumeId:id}}),tx.resumeProject.deleteMany({where:{resumeId:id}}),tx.resumeCertification.deleteMany({where:{resumeId:id}})]);
+      await Promise.all([tx.resumeExperience.deleteMany({where:{resumeId:id}}),tx.resumeEducation.deleteMany({where:{resumeId:id}}),tx.resumeSkill.deleteMany({where:{resumeId:id}}),tx.resumeProject.deleteMany({where:{resumeId:id}}),tx.resumeCertification.deleteMany({where:{resumeId:id}}),tx.resumeCustomSection.deleteMany({where:{resumeId:id}})]);
       await Promise.all([
         d.experiences.length&&tx.resumeExperience.createMany({data:d.experiences.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
         d.educations.length&&tx.resumeEducation.createMany({data:d.educations.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
         d.skills.length&&tx.resumeSkill.createMany({data:d.skills.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
         d.projects.length&&tx.resumeProject.createMany({data:d.projects.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
         d.certifications.length&&tx.resumeCertification.createMany({data:d.certifications.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
+        d.customSections.length&&tx.resumeCustomSection.createMany({data:d.customSections.map((x,i)=>({...x,id:undefined,resumeId:id,sortOrder:i}))}),
       ]);
     });
     return NextResponse.json({ok:true});
