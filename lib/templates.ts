@@ -1,4 +1,4 @@
-export const templateIds = ["classic","modern","minimal","executive","compact","sidebar","centered","blue","mono","creative"] as const;
+export const templateIds = ["classic","modern","minimal","executive","compact","sidebar","centered","blue","mono","creative","crimson","sandstone","slate","teal","framed"] as const;
 export type TemplateId = typeof templateIds[number];
 export type TemplateCategory = "Simple"|"Modern"|"Professional"|"Creative";
 
@@ -26,6 +26,11 @@ export const resumeTemplates: readonly ResumeTemplate[] = [
   {id:"blue",name:"True Blue",description:"Crisp blue rules with a corporate finish.",category:"Professional",layout:"single",accent:"#315f7d",panel:"#ffffff",header:"plain",headings:"line",density:"compact"},
   {id:"mono",name:"Mono Line",description:"Sharp monochrome styling for technical roles.",category:"Simple",layout:"single",accent:"#111111",panel:"#ffffff",header:"plain",headings:"caps",density:"compact"},
   {id:"creative",name:"Cobalt Edge",description:"Bold blue sidebar for creative confidence.",category:"Creative",layout:"split",accent:"#174f70",panel:"#174f70",header:"plain",headings:"bar",density:"comfortable"},
+  {id:"crimson",name:"Crimson Banner",description:"A confident banner with refined contrast.",category:"Creative",layout:"single",accent:"#7a2e3d",panel:"#ffffff",header:"band",headings:"caps",density:"comfortable"},
+  {id:"sandstone",name:"Sandstone Dual",description:"Warm neutral split for thoughtful profiles.",category:"Modern",layout:"split",accent:"#746558",panel:"#ddd4c8",header:"plain",headings:"line",density:"comfortable"},
+  {id:"slate",name:"Slate Column",description:"Cool gray sidebar and compact structure.",category:"Professional",layout:"split",accent:"#40545f",panel:"#dce2e5",header:"plain",headings:"caps",density:"compact"},
+  {id:"teal",name:"Teal Focus",description:"Fresh teal hierarchy with an open layout.",category:"Modern",layout:"single",accent:"#176b68",panel:"#ffffff",header:"line",headings:"bar",density:"comfortable"},
+  {id:"framed",name:"Framed Classic",description:"Elegant centered type with formal rules.",category:"Simple",layout:"single",accent:"#4c4038",panel:"#ffffff",header:"centered",headings:"caps",density:"compact"},
 ] as const;
 
 export function getTemplate(id:string):ResumeTemplate{return resumeTemplates.find(template=>template.id===id)??resumeTemplates[0]}
